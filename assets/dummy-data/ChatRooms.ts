@@ -126,7 +126,8 @@ export default [{
     content: 'Hola hola coca cola?',
     createdAt: '2020-09-27T15:40:00.000Z',
   }
-}, {
+}, 
+{
   id: '9',
   users: [{
     id: 'u1',
@@ -142,4 +143,6 @@ export default [{
     content: 'Meet me at the same place',
     createdAt: '2020-09-25T15:40:00.000Z',
   },
-}]
+  }
+
+]

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, View, Image } from "react-native";
 import styles from "./styles";
 
 export default function ChatRoomItem(props: any) {
