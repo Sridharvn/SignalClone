@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, StyleSheet, View, Image, FlatList } from "react-native";
 import { RootTabScreenProps } from "../types";
 import ChatRoomItem from "../components/ChatRoomItem";
-import chatRoomsData from "./../assets/dummy-data/ChatRooms";
+import chatRoomsData from "../assets/dummy-data/ChatRooms";
 
 const chatRoom1 = chatRoomsData[0];
 const chatRoom2 = chatRoomsData[1];
