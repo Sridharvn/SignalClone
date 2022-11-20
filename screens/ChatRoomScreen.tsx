@@ -3,8 +3,15 @@ import React from "react";
 import Message from "../components/Message";
 import ChatRoomData from "../assets/dummy-data/Chats";
 import MessageInput from "../components/MessageInput";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
 export default function ChatRoomScreen() {
+  const route = useRoute();
+  console.warn("Displaying chat room of :", route.params?.id);
+  const navigation = useNavigation();
+  navigation.setOptions({
+    title: route.params.id ? route.params.id : "No Username",
+  });
   return (
     <SafeAreaView style={styles.page}>
       <FlatList

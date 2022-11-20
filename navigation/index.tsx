@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Feather } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -12,7 +12,15 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import {
+  ColorSchemeName,
+  Pressable,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  useWindowDimensions,
+} from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -30,6 +38,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import styles from "../components/ChatRoomItem/styles";
 
 export default function Navigation({
   colorScheme,
@@ -56,9 +65,21 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => <HomeHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
         name="ChatRoom"
         component={ChatRoomScreen}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => <ChatRoomHeader {...props} />,
+          title: "Username",
+        }}
       />
       <Stack.Screen
         name="NotFound"
@@ -89,6 +110,102 @@ function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
+const HomeHeader = (props: any) => {
+  const { width } = useWindowDimensions();
+  return (
+    <SafeAreaView
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width,
+        padding: 10,
+        marginHorizontal: 3,
+        flex: 1,
+      }}
+    >
+      <Image
+        source={{
+          uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+        }}
+        style={{ width: 30, height: 30, borderRadius: 30 }}
+      ></Image>
+      <Text
+        style={{
+          color: "grey",
+          justifyContent: "center",
+          fontWeight: "bold",
+          textAlign: "center",
+        }}
+      >
+        Signal
+      </Text>
+      <View style={{ flexDirection: "row", marginHorizontal: 10 }}>
+        <Feather
+          name="camera"
+          size={20}
+          color="grey"
+          style={{ marginHorizontal: 10 }}
+        />
+        <Feather
+          name="edit-2"
+          size={20}
+          color="grey"
+          style={{ marginHorizontal: 10 }}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
+const ChatRoomHeader = (props: any) => {
+  const { width } = useWindowDimensions();
+  return (
+    <SafeAreaView
+      style={{
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        width: width - 100,
+        padding: 10,
+        marginLeft: -40,
+        marginHorizontal: 3,
+        flex: 1,
+      }}
+    >
+      <Image
+        source={{
+          uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+        }}
+        style={{ width: 30, height: 30, borderRadius: 30 }}
+      ></Image>
+      <Text
+        style={{
+          color: "grey",
+          justifyContent: "center",
+          fontWeight: "bold",
+          marginLeft: 10,
+        }}
+      >
+        {props.children}
+      </Text>
+      <View style={{ flexDirection: "row", marginLeft: 170 }}>
+        <Feather
+          name="camera"
+          size={20}
+          color="grey"
+          style={{ marginHorizontal: 10 }}
+        />
+        <Feather
+          name="edit-2"
+          size={20}
+          color="grey"
+          style={{ marginHorizontal: 10 }}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
